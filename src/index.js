@@ -1,8 +1,20 @@
 "use strict";
 const CreditCard = require('../src/credit_card.js');
-const lineReader = require('readline').createInterface({
-  input: require('fs').createReadStream('fixture.txt')
-});
+
+const commandLineArgs = process.argv.slice(2);
+let lineReader = require('readline');
+if (commandLineArgs[0]) {
+  lineReader = lineReader.createInterface({
+    input: require('fs').createReadStream(commandLineArgs[0]),
+    output: process.stdout
+  })
+}
+else {
+  lineReader = lineReader.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+}
 
 let creditAccounts = {};
 lineReader.on('line', function (line) {
