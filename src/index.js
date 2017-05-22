@@ -39,5 +39,5 @@ lineReader.on('line', function (line) {
 });
 
 lineReader.on('close', function(line) {
-  console.log(creditAccounts)
+  console.log(CreditCard.printBalances(creditAccounts));
 })

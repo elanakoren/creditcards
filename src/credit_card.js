@@ -6,6 +6,7 @@ class CreditCard {
     this.cardholder = cardholder;
     this.limit = parseInt(limit.slice(1), 10);
     this.balance = 0;
+    this.isLuhnCompliant = this.isLuhnCompliant(this.number);
   }
 
   formatNumber(number) {
@@ -36,28 +37,38 @@ class CreditCard {
   }
 
   charge(amount) {
-    if (!this.isLuhnCompliant(this.number)) {
+    const parsedCharge = parseInt(amount.slice(1), 10);
+    if (!this.isLuhnCompliant || (parsedCharge + this.balance > this.limit)) {
       return;
     }
     else {
-      const parsedCharge = parseInt(amount.slice(1), 10);
-      if (parsedCharge + this.balance > this.limit) {
-        return;
-      }
-      else {
-        this.balance = this.balance + parsedCharge;
-      }
+      this.balance = this.balance + parsedCharge;
     }
   }
 
   credit(amount) {
-    if (!this.isLuhnCompliant(this.number)) {
+    const parsedCredit = parseInt(amount.slice(1), 10);
+    if (!this.isLuhnCompliant) {
       return;
     }
     else {
-      const parsedCredit = parseInt(amount.slice(1), 10);
       this.balance = this.balance - parsedCredit;
     }
+  }
+
+  static printBalances(creditAccounts) {
+    const sortedCardholders = Object.keys(creditAccounts).sort();
+    let output = "";
+
+    sortedCardholders.forEach((cardholder) => {
+      if (!creditAccounts[cardholder].isLuhnCompliant) {
+        output = output + `${cardholder}: error` + "\n"
+      }
+      else {
+        output = output + `${cardholder}: $${creditAccounts[cardholder].balance}` + "\n"
+      }
+    })
+    return output.trim();
   }
 }
 

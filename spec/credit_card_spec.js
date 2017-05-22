@@ -11,8 +11,8 @@ describe('CreditCard', () => {
   });
 
   it('reports whether the number passes the luhn check', () => {
-    expect(invalidCard.isLuhnCompliant()).not.toBeTruthy();
-    expect(validCard.isLuhnCompliant()).toBeTruthy();
+    expect(invalidCard.isLuhnCompliant).not.toBeTruthy();
+    expect(validCard.isLuhnCompliant).toBeTruthy();
   });
 
   it('stores a cardholder', () => {
@@ -54,8 +54,33 @@ describe('CreditCard', () => {
     });
 
     it('accepts valid credits', () => {
-      validCard.credit('$200.00');
+      validCard.credit('$200');
       expect(validCard.balance).toEqual(-200);
     });
   });
+
+  describe('#printBalances', () => {
+    let creditAccounts;
+    const zeldasCard = new CreditCard('zelda', validCardNumber, '$500');
+    const xerxesCard = new CreditCard('xerxes', validCardNumber, '$700');
+    const amysCard = new CreditCard('amy', invalidCardNumber, '$2000');
+
+    beforeEach(() => {
+      zeldasCard.charge('$50');
+      zeldasCard.credit('$100');
+      xerxesCard.charge('$200');
+      xerxesCard.credit('$50');
+      amysCard.charge('$25');
+
+      creditAccounts = {
+        zelda: zeldasCard,
+        xerxes: xerxesCard,
+        amy: amysCard
+      };
+    });
+
+    it('prints a sorted representation of the balance sheet', () => {
+      expect(CreditCard.printBalances(creditAccounts)).toEqual('amy: error\nxerxes: $150\nzelda: $-50');
+    });
+  })
 });
