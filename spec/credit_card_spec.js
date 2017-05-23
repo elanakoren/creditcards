@@ -67,8 +67,6 @@ describe('CreditCard', () => {
 
     beforeEach(() => {
       zeldasCard.charge('$50');
-      zeldasCard.credit('$100');
-      xerxesCard.charge('$200');
       xerxesCard.credit('$50');
       amysCard.charge('$25');
 
@@ -80,7 +78,7 @@ describe('CreditCard', () => {
     });
 
     it('prints a sorted representation of the balance sheet', () => {
-      expect(CreditCard.printBalances(creditAccounts)).toEqual('amy: error\nxerxes: $150\nzelda: $-50');
+      expect(CreditCard.printBalances(creditAccounts)).toEqual('amy: error\nxerxes: $-50\nzelda: $50');
     });
   })
 });
