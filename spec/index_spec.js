@@ -12,6 +12,7 @@ describe('#processOperations', () => {
         Tom: tomsCard
       }
     });
+    
     it('delegates to the appopriate method in CreditCard', () => {
       const fn = lineProcessor(fakeCreditAccounts)
       fn('Credit Tom $500');
@@ -26,7 +27,7 @@ describe('#processOperations', () => {
         Tom: tomsCard
       }
     });
-    
+
     it('delegates to the appopriate method in CreditCard', () => {
       const fn = lineProcessor(fakeCreditAccounts)
       fn('Charge Tom $500');

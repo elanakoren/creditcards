@@ -1,6 +1,6 @@
 ### Setup:
 
-To set up the app, you need node installed. On a Mac, run `brew install node` at the terminal. (Otherwise, use your package manager of choice.) After that, install the app's dependencies by running `npm i` in the project root directory. Run tests at the terminal by typing `jasmine`. Finally, to run the program, input `node src/index.js [INPUT-FILENAME]` or `node src/index.js < [INPUT-FILENAME]` from the project root directory. I provided a fixture file (fixture.txt), adapted from the problem's specifications, but you don't need to use it.
+To set up the app, you need node installed. On a Mac, run `brew install node` at the terminal. (Otherwise, use your package manager of choice.) After that, install the app's dependencies by running `npm i` and `npm install -g jasmine` in the project root directory. Run tests at the terminal by typing `jasmine`. Finally, to run the program, input `node src/index.js [INPUT-FILENAME]` or `node src/index.js < [INPUT-FILENAME]` from the project root directory. I provided a fixture file (fixture.txt), adapted from the problem's specifications, but you don't need to use it.
 
 ### Why I chose Javascript:
 
